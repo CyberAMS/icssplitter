@@ -16,15 +16,16 @@ parser.add_argument('output_file',help='the output ICS file')
 
 args = parser.parse_args()
 
-print 'Extracting %s events from %s into %s' % (args.year,args.input_file,args.output_file)
+print("Extracting %s events from %s into %s" % (args.year,args.input_file,args.output_file))
 
-created_pattern = re.compile('^DTSTART.+%s' % args.year)
+# created_pattern = re.compile('^DTSTART.+%s' % args.year)
+created_pattern = re.compile('^DTSTART.+:%s' % args.year)
 
 in_fname = args.input_file
 out_fname = args.output_file
 
 if os.path.exists(out_fname):
-	print 'ERROR: output file already exists! As a safety check, this script will not overwrite an ICS file'
+	print("ERROR: output file already exists! As a safety check, this script will not overwrite an ICS file")
 	exit()
 
 infh = open(in_fname,'r')
@@ -76,7 +77,7 @@ outfh.write(END_CALENDAR)
 outfh.close()
 
 # done!
-print 'wrote %d of %d events' % (out_event_count,event_count)
+print("wrote %d of %d events" % (out_event_count,event_count))
 			
 
 	
